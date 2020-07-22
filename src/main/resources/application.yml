@@ -1,0 +1,9 @@
+server:
+  port: 3200
+
+jwksaggregator:
+  fixedJwksLocations:
+    - classpath:jwks/customer-jwks.json
+  remoteJwksUris:
+    - http://localhost:8080/auth/realms/demo/protocol/openid-connect/certs
+    - http://localhost:8081/auth/realms/acme-apps/protocol/openid-connect/certs
