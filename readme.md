@@ -8,7 +8,10 @@ Exposes a merged JWKS document based on collected JWKS documents from multiple s
 mvn clean package
 ```
 
-
+# Run
+```
+java -jar target/*.jar
+```
 
 # Config
 
