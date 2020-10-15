@@ -14,7 +14,7 @@ class JwksController {
     private final JwksService jwksService;
 
     @GetMapping
-    Object getJwks(String channel) {
-        return jwksService.getJwks(channel).toJSONObject();
+    Object getJwks() {
+        return jwksService.getJwks().toJSONObject();
     }
 }

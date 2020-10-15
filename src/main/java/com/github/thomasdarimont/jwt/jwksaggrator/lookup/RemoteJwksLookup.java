@@ -24,7 +24,6 @@ public class RemoteJwksLookup extends DynamicJwksLookup {
 
     @Override
     public JWKSet fetch() {
-
         try {
             String json = restTemplate.getForObject(jwksUri, String.class);
             return JWKSet.parse(json);

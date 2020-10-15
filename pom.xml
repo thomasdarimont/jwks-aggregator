@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.1.RELEASE</version>
+        <version>2.3.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.github.thomasdarimont.jwt</groupId>
@@ -16,14 +16,19 @@
 
     <properties>
         <java.version>11</java.version>
-        <nimbus.version>8.19</nimbus.version>
-        <httpclient.version>4.5.12</httpclient.version>
+        <nimbus.version>9.0.1</nimbus.version>
+        <httpclient.version>4.5.13</httpclient.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
         <dependency>

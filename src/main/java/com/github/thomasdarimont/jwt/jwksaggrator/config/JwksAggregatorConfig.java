@@ -11,12 +11,14 @@ import org.springframework.web.client.RestTemplate;
 class JwksAggregatorConfig {
 
     @Bean
-    RestTemplate restTemplate() {
+    RestTemplate restTemplate(JwksAggregatorProperties jwksAggregatorProperties) {
+
         RestTemplate restTemplate = new RestTemplate();
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
-        requestFactory.setConnectTimeout(2000);
-        requestFactory.setReadTimeout(5000);
+        requestFactory.setConnectTimeout(jwksAggregatorProperties.getFetch().getConnectTimeoutMillis());
+        requestFactory.setReadTimeout(jwksAggregatorProperties.getFetch().getReadTimeoutMillis());
         restTemplate.setRequestFactory(requestFactory);
+
         return restTemplate;
     }
 }

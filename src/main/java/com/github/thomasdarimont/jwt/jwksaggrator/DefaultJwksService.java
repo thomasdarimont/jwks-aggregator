@@ -13,7 +13,6 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
 import java.net.URI;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,14 +38,17 @@ class DefaultJwksService implements JwksService {
 
         List<URI> remoteJwksUris = jwksAggregatorProperties.getRemoteJwksUris();
         remoteJwksUris.stream()
-                // TODO make timeout configurable
-                .map(uri -> new RemoteJwksLookup(uri, Duration.ofSeconds(30), restTemplate))
+                .map(uri -> new RemoteJwksLookup(uri, jwksAggregatorProperties.getFetch().getCacheDuration(), restTemplate))
 //                .peek(RemoteJwksLookup::fetch)
                 .collect(Collectors.toCollection(() -> lookups));
+
+        if (jwksAggregatorProperties.isEagerFetch()) {
+            getJwks();
+        }
     }
 
     @Override
-    public JWKSet getJwks(String channel) {
+    public JWKSet getJwks() {
 
         List<JWK> jwk = new ArrayList<>();
 

@@ -35,16 +35,17 @@ public abstract class DynamicJwksLookup implements JwksLookup {
             return jwksHolder.getJwks();
         }
 
+        long fetchStartTimeMillis = System.currentTimeMillis();
         JWKSet jwks = fetch();
+        long fetchEndedTimeMillis = System.currentTimeMillis();
 
-        long updatedAt = System.currentTimeMillis();
         if (jwks == null) {
             log.debug("Skipping empty jwks update. lookup={}", this);
             jwks = jwksHolder.getJwks();
         } else {
-            log.info("Updated jwks. lookup={}", this);
+            log.info("Updated jwks. lookup={} took {}ms", this, fetchEndedTimeMillis - fetchStartTimeMillis);
         }
-        this.reference.compareAndSet(jwksHolder, new JwksHolder(jwks, updatedAt));
+        this.reference.compareAndSet(jwksHolder, new JwksHolder(jwks, fetchEndedTimeMillis));
 
         return jwks;
     }
